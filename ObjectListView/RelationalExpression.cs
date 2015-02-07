@@ -1,3 +1,6 @@
+// ObjectListView
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
+
 using System;
 
 namespace JesseJohnston

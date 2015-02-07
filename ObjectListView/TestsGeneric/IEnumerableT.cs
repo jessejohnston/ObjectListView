@@ -1,20 +1,19 @@
 // ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 #pragma warning disable 1591	// Missing XML comment
 
 #if TEST
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
-using JesseJohnston;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JesseJohnston.Tests.Generic
 {
-	[TestFixture]
+	[TestClass]
 	public class IEnumerableTTests
 	{
-		[Test]
+		[TestMethod]
 		public void GetEnumeratorEmptyList()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -24,7 +23,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsFalse(e.MoveNext());
 		}
 
-		[Test]
+		[TestMethod]
 		public void GetEnumeratorNonEmptyList()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();

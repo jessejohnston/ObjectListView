@@ -1,19 +1,18 @@
 // ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 #pragma warning disable 1591	// Missing XML comment
 
 #if TEST
 using System;
-using NUnit.Framework;
-using JesseJohnston;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JesseJohnston.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class RelationalExpressionTests
 	{
-		[Test]
+		[TestMethod]
 		public void Construct()
 		{
 			RelationalExpression exp = new RelationalExpression("prop", "value", RelationalOperator.Equal);
@@ -22,28 +21,28 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(RelationalOperator.Equal, exp.Operator);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void ConstructPropNull()
 		{
 			RelationalExpression exp = new RelationalExpression(null, "value", RelationalOperator.Equal);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void ConstructPropEmpty()
 		{
 			RelationalExpression exp = new RelationalExpression("", "value", RelationalOperator.Equal);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void ConstructVauleNull()
 		{
 			RelationalExpression exp = new RelationalExpression("prop", null, RelationalOperator.Equal);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConstructVauleEmpty()
 		{
 			RelationalExpression exp = new RelationalExpression("prop", "", RelationalOperator.Equal);
@@ -52,7 +51,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(RelationalOperator.Equal, exp.Operator);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void ConstructOpNone()
 		{

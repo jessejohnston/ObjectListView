@@ -1,5 +1,5 @@
 // ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 #pragma warning disable 1591	// Missing XML comment
 
@@ -7,15 +7,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
-using JesseJohnston;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JesseJohnston.Tests.Generic
 {
-	[TestFixture]
+	[TestClass]
 	public class ICollectionTests
 	{
-		[Test]
+		[TestMethod]
 		public void CopyTo()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -45,7 +44,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(new DateTime(1975, 6, 6), item.DateTimeValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CopyToEmptyList()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -53,7 +52,7 @@ namespace JesseJohnston.Tests.Generic
 			((ICollection)factory.View).CopyTo(array, 0);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Count()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -66,21 +65,21 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(list.Count, ((ICollection)factory.View).Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CountEmptyList()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
 			Assert.AreEqual(0, ((ICollection)factory.View).Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void IsSynchronized()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
 			Assert.IsFalse(((IList)factory.View).IsSynchronized);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SyncRoot()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();

@@ -1,14 +1,10 @@
 // ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 #pragma warning disable 1591	// Missing XML comment
 
 #if TEST
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Diagnostics;
 
 namespace JesseJohnston.Tests
 {

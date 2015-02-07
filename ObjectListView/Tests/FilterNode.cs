@@ -1,16 +1,15 @@
 // ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 #pragma warning disable 1591	// Missing XML comment
 
 #if TEST
 using System;
-using NUnit.Framework;
-using JesseJohnston;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JesseJohnston.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class FilterNodeTests
 	{
 		#region Types
@@ -30,7 +29,7 @@ namespace JesseJohnston.Tests
 		}
 		#endregion
 
-		[Test]
+		[TestMethod]
 		public void ConstructTerminalNode()
 		{
 			RelationalExpression exp = new RelationalExpression("Name", "Smith", RelationalOperator.Equal);
@@ -42,7 +41,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(LogicalOperator.None, node.Operator);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateTerminalNodeTrue()
 		{
 			RelationalExpression exp = new RelationalExpression("Name", "Smith", RelationalOperator.Equal);
@@ -54,7 +53,7 @@ namespace JesseJohnston.Tests
 			Assert.IsTrue(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateTerminalNodeFalse()
 		{
 			RelationalExpression exp = new RelationalExpression("Name", "Smith", RelationalOperator.Equal);
@@ -66,7 +65,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConstructOrNode()
 		{
 			RelationalExpression expLeft = new RelationalExpression("Name", "Smith", RelationalOperator.Less);
@@ -82,7 +81,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(LogicalOperator.Or, node.Operator);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateOrNodeFalseFalse()
 		{
 			RelationalExpression expLeft = new RelationalExpression("Name", "Smith", RelationalOperator.Less);
@@ -101,7 +100,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateOrNodeFalseTrue()
 		{
 			RelationalExpression expLeft = new RelationalExpression("Name", "Smith", RelationalOperator.Less);
@@ -120,7 +119,7 @@ namespace JesseJohnston.Tests
 			Assert.IsTrue(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateOrNodeTrueFalse()
 		{
 			RelationalExpression expLeft = new RelationalExpression("Name", "Smith", RelationalOperator.Less);
@@ -139,7 +138,7 @@ namespace JesseJohnston.Tests
 			Assert.IsTrue(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateOrNodeTrueTrue()
 		{
 			RelationalExpression expLeft = new RelationalExpression("Name", "Smith", RelationalOperator.Less);
@@ -158,7 +157,7 @@ namespace JesseJohnston.Tests
 			Assert.IsTrue(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConstructAndNode()
 		{
 			RelationalExpression expLeft = new RelationalExpression("Name", "Smith", RelationalOperator.Less);
@@ -174,7 +173,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(LogicalOperator.And, node.Operator);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateAndNodeFalseFalse()
 		{
 			RelationalExpression expLeft = new RelationalExpression("Name", "Smith", RelationalOperator.Less);
@@ -193,7 +192,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateAndNodeFalseTrue()
 		{
 			RelationalExpression expLeft = new RelationalExpression("Name", "Smith", RelationalOperator.Less);
@@ -212,7 +211,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateAndNodeTrueFalse()
 		{
 			RelationalExpression expLeft = new RelationalExpression("Name", "Smith", RelationalOperator.Less);
@@ -231,7 +230,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateAndNodeTrueTrue()
 		{
 			RelationalExpression expLeft = new RelationalExpression("Name", "Smith", RelationalOperator.Less);
@@ -250,7 +249,7 @@ namespace JesseJohnston.Tests
 			Assert.IsTrue(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConstructOrTree()
 		{
 			FilterNode nodeLeft = new FilterNode(new TestFilterNode(true), new TestFilterNode(true), LogicalOperator.Or);
@@ -264,7 +263,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(LogicalOperator.Or, node.Operator);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateOrTreeFalseFalse()
 		{
 			FilterNode nodeLeft = new FilterNode(new TestFilterNode(false), new TestFilterNode(false), LogicalOperator.Or);
@@ -281,7 +280,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateOrTreeFalseTrue()
 		{
 			FilterNode nodeLeft = new FilterNode(new TestFilterNode(false), new TestFilterNode(false), LogicalOperator.Or);
@@ -298,7 +297,7 @@ namespace JesseJohnston.Tests
 			Assert.IsTrue(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateOrTreeTrueFalse()
 		{
 			FilterNode nodeLeft = new FilterNode(new TestFilterNode(true), new TestFilterNode(false), LogicalOperator.Or);
@@ -315,7 +314,7 @@ namespace JesseJohnston.Tests
 			Assert.IsTrue(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateOrTreeTrueTrue()
 		{
 			FilterNode nodeLeft = new FilterNode(new TestFilterNode(true), new TestFilterNode(false), LogicalOperator.Or);
@@ -332,7 +331,7 @@ namespace JesseJohnston.Tests
 			Assert.IsTrue(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConstructAndTree()
 		{
 			FilterNode nodeLeft = new FilterNode(new TestFilterNode(true), new TestFilterNode(true), LogicalOperator.Or);
@@ -346,7 +345,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(LogicalOperator.And, node.Operator);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateAndTreeFalseFalse()
 		{
 			FilterNode nodeLeft = new FilterNode(new TestFilterNode(false), new TestFilterNode(false), LogicalOperator.Or);
@@ -363,7 +362,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateAndTreeFalseTrue()
 		{
 			FilterNode nodeLeft = new FilterNode(new TestFilterNode(false), new TestFilterNode(false), LogicalOperator.Or);
@@ -380,7 +379,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateAndTreeTrueFalse()
 		{
 			FilterNode nodeLeft = new FilterNode(new TestFilterNode(true), new TestFilterNode(false), LogicalOperator.Or);
@@ -397,7 +396,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EvaluateAndTreeTrueTrue()
 		{
 			FilterNode nodeLeft = new FilterNode(new TestFilterNode(true), new TestFilterNode(false), LogicalOperator.Or);
@@ -414,28 +413,28 @@ namespace JesseJohnston.Tests
 			Assert.IsTrue(node.Evaluated.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void ParseNull()
 		{
 			FilterNode.Parse(null);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void ParseEmpty()
 		{
 			FilterNode.Parse("");
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void ParseSingleTerm()
 		{
 			FilterNode.Parse("name");
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseSingleRelationEqual()
 		{
 			FilterNode node = FilterNode.Parse("name = value");
@@ -450,7 +449,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("value", node.Term.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseSingleRelationEqualAlternate()
 		{
 			FilterNode node = FilterNode.Parse("name == value");
@@ -465,7 +464,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("value", node.Term.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseSingleRelationEqualWhitespace()
 		{
 			FilterNode node = FilterNode.Parse("   name             =               value         ");
@@ -480,7 +479,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("value", node.Term.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseSingleRelationEqualQuotedWhitespace()
 		{
 			FilterNode node = FilterNode.Parse("name = ' value '");
@@ -495,7 +494,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(" value ", node.Term.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseSingleRelationEqualDoubleQuotedValue()
 		{
 			FilterNode node = FilterNode.Parse("Name=\"O'Reilly\"");
@@ -510,7 +509,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("O'Reilly", node.Term.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseSingleRelationEqualUnbalancedDoubleQuotedValue()
 		{
 			FilterNode node = FilterNode.Parse("Name=\"O'Reilly");
@@ -525,7 +524,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("O'Reilly", node.Term.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseSingleRelationEqualNoWhitespace()
 		{
 			FilterNode node = FilterNode.Parse("name=value");
@@ -540,7 +539,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("value", node.Term.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseSingleRelationInequal()
 		{
 			FilterNode node = FilterNode.Parse("name != value");
@@ -555,7 +554,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("value", node.Term.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseSingleRelationInequalAlternate()
 		{
 			FilterNode node = FilterNode.Parse("name <> value");
@@ -570,7 +569,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("value", node.Term.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseSingleRelationInequalAlternateNoWhitespace()
 		{
 			FilterNode node = FilterNode.Parse("name<>value");
@@ -585,7 +584,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("value", node.Term.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseSingleRelationLess()
 		{
 			FilterNode node = FilterNode.Parse("name < value");
@@ -600,7 +599,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("value", node.Term.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseSingleRelationLessEqual()
 		{
 			FilterNode node = FilterNode.Parse("name <= value");
@@ -615,7 +614,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("value", node.Term.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseSingleRelationGreater()
 		{
 			FilterNode node = FilterNode.Parse("name > value");
@@ -630,7 +629,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("value", node.Term.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseSingleRelationGreaterEqual()
 		{
 			FilterNode node = FilterNode.Parse("name >= value");
@@ -645,14 +644,14 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("value", node.Term.Value);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void ParseBadCondition()
 		{
 			FilterNode.Parse("name = value But orders > 50");
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseAnd()
 		{
 			FilterNode node = FilterNode.Parse("name = value and orders > 50");
@@ -683,7 +682,7 @@ namespace JesseJohnston.Tests
 			Assert.IsNull(node.Term);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseAndWhitespace()
 		{
 			FilterNode node = FilterNode.Parse("   name     =      value     and    orders    >    50   ");
@@ -714,7 +713,7 @@ namespace JesseJohnston.Tests
 			Assert.IsNull(node.Term);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseAndNoWhitespace()
 		{
 			FilterNode node = FilterNode.Parse("name=value AND orders>50");
@@ -745,7 +744,7 @@ namespace JesseJohnston.Tests
 			Assert.IsNull(node.Term);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseAndQuoted()
 		{
 			FilterNode node = FilterNode.Parse("LastName = 'Smi*' AND FirstName = 'J*'");
@@ -776,7 +775,7 @@ namespace JesseJohnston.Tests
 			Assert.IsNull(node.Term);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseOr()
 		{
 			FilterNode node = FilterNode.Parse("name = value Or orders > 50");
@@ -807,7 +806,7 @@ namespace JesseJohnston.Tests
 			Assert.IsNull(node.Term);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseOrQuoted()
 		{
 			FilterNode node = FilterNode.Parse("LastName = 'Smi*' OR FirstName = 'J*'");
@@ -838,7 +837,7 @@ namespace JesseJohnston.Tests
 			Assert.IsNull(node.Term);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseAndOr()
 		{
 			FilterNode node = FilterNode.Parse("name = value AND State = OR OR orders > 50");
@@ -876,7 +875,7 @@ namespace JesseJohnston.Tests
 			Assert.IsNull(node.Term);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseOrAnd()
 		{
 			FilterNode node = FilterNode.Parse("name = value OR State = OR AND orders > 50");
@@ -914,7 +913,7 @@ namespace JesseJohnston.Tests
 			Assert.IsNull(node.Term);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseOrAndParens()
 		{
 			FilterNode node = FilterNode.Parse("(name = value OR State = OR) AND orders > 50");
@@ -953,7 +952,7 @@ namespace JesseJohnston.Tests
 			Assert.IsNull(node.Term);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ParseAndOrAndParens()
 		{
 			// Level 0

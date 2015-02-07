@@ -1,5 +1,5 @@
 // ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 #pragma warning disable 1591	// Missing XML comment
 
@@ -7,30 +7,29 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
-using JesseJohnston;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JesseJohnston.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class IEnumerableTests
 	{
 		private List<SimpleClass> classList;
 
-		[SetUp]
+		[TestInitialize]
 		public void Setup()
 		{
 			classList = new List<SimpleClass>();
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void GetEnumeratorNullList()
 		{
 			ObjectListView view = new ObjectListView(null);
 		}
 
-		[Test]
+		[TestMethod]
 		public void GetEnumeratorEmptyList()
 		{
 			ObjectListView view = new ObjectListView(classList);
@@ -39,7 +38,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(e.MoveNext());
 		}
 
-		[Test]
+		[TestMethod]
 		public void GetEnumeratorNonEmptyList()
 		{
 			classList.Add(new SimpleClass(100, "aaa", new DateTime(1970, 1, 1)));

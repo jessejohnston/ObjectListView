@@ -1,5 +1,5 @@
 ﻿// ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jesse Johnston")]
 [assembly: AssemblyProduct("ObjectListView")]
-[assembly: AssemblyCopyright("Copyright © 2006, 2007 Jesse Johnston. All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2006-2015 Jesse Johnston. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -34,4 +34,4 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.0.0.12")]
+[assembly: AssemblyVersion("1.0.0.13")]

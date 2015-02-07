@@ -1,5 +1,5 @@
 // ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 #pragma warning disable 1591	// Missing XML comment
 
@@ -7,16 +7,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
-using JesseJohnston;
 using System.ComponentModel;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JesseJohnston.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class ObjectListViewTests
 	{
-		[Test]
+		[TestMethod]
 		public void ConstructEmptyList()
 		{
 			ObjectListView view = new ObjectListView(new ArrayList());
@@ -24,7 +23,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, view.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConstructEmptyGenericList()
 		{
 			ObjectListView view = new ObjectListView(new List<SimpleClass>());
@@ -32,7 +31,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, view.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void BeginUpdate()
 		{
 			ViewFactory factory = ViewFactory.IBindingListINotifyPropertyChangedItems();
@@ -56,7 +55,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, factory.ListChangedResetCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void BeginUpdateSortFilter()
 		{
 			ViewFactory factory = ViewFactory.IBindingListINotifyPropertyChangedItems();
@@ -92,7 +91,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, factory.ListChangedResetCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EndUpdateWithoutBeginUpdate()
 		{
 			ViewFactory factory = ViewFactory.IBindingListINotifyPropertyChangedItems();
@@ -114,7 +113,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, factory.ListChangedResetCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EndUpdateWithoutChanges()
 		{
 			ViewFactory factory = ViewFactory.IBindingListINotifyPropertyChangedItems();
@@ -133,7 +132,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, factory.ListChangedResetCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortedEvent()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -164,7 +163,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, factory.SortedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void RemoveSorted()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -205,7 +204,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, factory.SortedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void RemoveSortedIBindingList()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -246,7 +245,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, factory.SortedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void PropertyComparerDefault()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -256,7 +255,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, view.PropertyComparers.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void PropertyComparerNoItemType()
 		{
@@ -266,7 +265,7 @@ namespace JesseJohnston.Tests
 			PropertyComparerCollection c = view.PropertyComparers;
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void PropertyComparerNullProperty()
 		{
@@ -276,7 +275,7 @@ namespace JesseJohnston.Tests
 			view.PropertyComparers[null] = new StringLengthComparer();
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void PropertyComparerEmptyProperty()
 		{
@@ -286,7 +285,7 @@ namespace JesseJohnston.Tests
 			view.PropertyComparers[""] = new StringLengthComparer();
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void PropertyComparerInvalidProperty()
 		{
@@ -296,7 +295,7 @@ namespace JesseJohnston.Tests
 			view.PropertyComparers["NonexistentProperty"] = new StringLengthComparer();
 		}
 
-		[Test]
+		[TestMethod]
 		public void PropertyComparerAdd()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -306,7 +305,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, view.PropertyComparers.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void PropertyComparerAddDuplicate()
 		{
@@ -317,7 +316,7 @@ namespace JesseJohnston.Tests
 			view.PropertyComparers.Add("StringProperty", new StringLengthComparer());
 		}
 
-		[Test]
+		[TestMethod]
 		public void PropertyComparerSet()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -327,7 +326,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, view.PropertyComparers.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void PropertyComparerSetTwice()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -338,7 +337,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, view.PropertyComparers.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void PropertyComparerSetNull()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -348,7 +347,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, view.PropertyComparers.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void PropertyComparerSetNullAfterSet()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -359,7 +358,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, view.PropertyComparers.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void PropertyComparerGet()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -370,7 +369,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(s, view.PropertyComparers["StringValue"]);
 		}
 
-		[Test]
+		[TestMethod]
 		public void PropertyComparerGetNotSet()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -379,7 +378,7 @@ namespace JesseJohnston.Tests
 			Assert.IsNull(view.PropertyComparers["StringValue"]);
 		}
 
-		[Test]
+		[TestMethod]
 		public void PropertyComparerGetSetNull()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -389,7 +388,7 @@ namespace JesseJohnston.Tests
 			Assert.IsNull(view.PropertyComparers["StringValue"]);
 		}
 
-		[Test]
+		[TestMethod]
 		public void PropertyComparerRemove()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -400,7 +399,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, view.PropertyComparers.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void PropertyComparerRemoveNoAdd()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -410,7 +409,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, view.PropertyComparers.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void UsePropertyComparer()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -441,7 +440,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("aaaa", ((SimpleClass)view[3]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void UsePropertyComparerAfterSort()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -478,7 +477,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("aaaa", ((SimpleClass)view[3]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void UsePropertyComparerUnsorted()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -508,7 +507,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("aa", ((SimpleClass)view[3]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void UsePropertyComparerOneColumnInMultiColumnSort()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -539,7 +538,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("a", ((SimpleClass)view[4]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void UsePropertyComparerMultipleColumnsInMultiColumnSort()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -571,7 +570,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("a", ((SimpleClass)view[4]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void PropertyComparerEventsMultipleSets()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -604,7 +603,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("aaaa", ((SimpleClass)view[3]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void PropertyComparerBeginUpdate()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -634,7 +633,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, factory.SortedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void PropertyComparerEndUpdateWithoutBeginUpdate()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -667,14 +666,14 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(2, factory.SortedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FilterPredicateDefault()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
 			Assert.IsNull(factory.View.FilterPredicate);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FilterPredicateNull()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -700,7 +699,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("eee", ((SimpleClass)view[4]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FilterPredicateEventRaised()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -723,7 +722,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, factory.ListChangedResetCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FilterPredicateEqualsInt()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -748,7 +747,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("eee", ((SimpleClass)view[2]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FilterPredicateVaryingCriteria()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -775,7 +774,7 @@ namespace JesseJohnston.Tests
 			}
 		}
 
-		[Test]
+		[TestMethod]
 		public void FilterPredicateVaryingListItemProperties()
 		{
 			ViewFactory factory = ViewFactory.IBindingListINotifyPropertyChangedItems();
@@ -799,7 +798,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(3, view.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FilterPredicateRemoveFilter()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -828,7 +827,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(5, ((SimpleClass)view[4]).IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FilterPredicateRemoveSetNull()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -857,7 +856,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(5, ((SimpleClass)view[4]).IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FilterPredicateRemoveSetFilterNull()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -879,7 +878,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(5, view.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FilterPredicateSetFilter()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -901,7 +900,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(2, view.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FilterRemoveSetPredicateNull()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -923,7 +922,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(5, view.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FilterSetPredicate()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -945,7 +944,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(2, view.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ToArray()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -968,7 +967,7 @@ namespace JesseJohnston.Tests
 				Assert.AreEqual(view[i], arr.GetValue(i));
 		}
 
-		[Test]
+		[TestMethod]
 		public void ToArrayEmpty()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -981,7 +980,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, arr.Length);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FindCriteria()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -996,7 +995,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(2, index);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FindCriteriaNullValue()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1011,7 +1010,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, index);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FindCriteriaPath()
 		{
 			ViewFactory factory = ViewFactory.IListOrders();
@@ -1041,7 +1040,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(2, firstIndex);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FindCriteriaPathInaccessibleValue()
 		{
 			ViewFactory factory = ViewFactory.IListOrders();
@@ -1073,7 +1072,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(3, firstIndex);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FindCriteriaSortedFiltered()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1091,7 +1090,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, index);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FindCriteriaNotFound()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1106,7 +1105,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(-1, index);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void FindCriteriaNull()
 		{
@@ -1121,7 +1120,7 @@ namespace JesseJohnston.Tests
 			view.Find((string)null);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void FindCriteriaEmpty()
 		{
@@ -1136,7 +1135,7 @@ namespace JesseJohnston.Tests
 			view.Find("");
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void FindCriteriaInvalid()
 		{
@@ -1151,7 +1150,7 @@ namespace JesseJohnston.Tests
 			view.Find("someprop = 7");
 		}
 
-		[Test]
+		[TestMethod]
 		public void FindPredicate()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1169,7 +1168,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(2, index);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FindPrediateNullValue()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1187,7 +1186,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(2, index);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FindPredicateSortedFiltered()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1209,7 +1208,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, index);
 		}
 
-		[Test]
+		[TestMethod]
 		public void FindPredicateNotFound()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1227,7 +1226,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(-1, index);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void FindPredicateNull()
 		{
@@ -1241,7 +1240,7 @@ namespace JesseJohnston.Tests
 			view.Find((Predicate)null);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Select()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1260,7 +1259,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(65, ((SimpleClass)matches[1]).IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SelectNullValue()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1276,7 +1275,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(60, ((SimpleClass)matches[0]).IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SelectCriteriaPath()
 		{
 			ViewFactory factory = ViewFactory.IListOrders();
@@ -1309,7 +1308,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("Gadgets", ((Order)matches[1]).Product);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SelectCriteriaPathInaccessibleValue()
 		{
 			ViewFactory factory = ViewFactory.IListOrders();
@@ -1344,7 +1343,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("Gadgets", ((Order)matches[1]).Product);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SelectNoMatches()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1361,7 +1360,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, matches.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SelectSortedFiltered()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1385,7 +1384,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(110, ((SimpleClass)matches[1]).IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void SelectNull()
 		{
@@ -1400,7 +1399,7 @@ namespace JesseJohnston.Tests
 			view.Select((string)null);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void SelectEmpty()
 		{
@@ -1415,7 +1414,7 @@ namespace JesseJohnston.Tests
 			view.Select("");
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void SelectInvalid()
 		{
@@ -1430,7 +1429,7 @@ namespace JesseJohnston.Tests
 			view.Select("someProp = 16");
 		}
 
-		[Test]
+		[TestMethod]
 		public void SelectPredicate()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1452,7 +1451,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(65, ((SimpleClass)matches[1]).IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SelectPredicateNoMatches()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1472,7 +1471,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, matches.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SelectPredicateSortedFiltered()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1499,7 +1498,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(110, ((SimpleClass)matches[1]).IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void SelectPredicateNull()
 		{
@@ -1514,7 +1513,7 @@ namespace JesseJohnston.Tests
 			view.Select((Predicate)null);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortNull()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1547,7 +1546,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("ddd", ((SimpleClass)view[4]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortEmpty()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1580,7 +1579,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("ddd", ((SimpleClass)view[4]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortGetNotSet()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1588,7 +1587,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("", factory.View.Sort);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortGetApplySort()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1615,7 +1614,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("IntegerValue ASC, StringValue DESC, DateTimeValue ASC", view.Sort);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortGetRemoveSort()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1643,7 +1642,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("", view.Sort);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void SortInvalidProperty()
 		{
@@ -1656,7 +1655,7 @@ namespace JesseJohnston.Tests
 			view.Sort = "BadProperty";
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void SortInvalidDirection()
 		{
@@ -1669,7 +1668,7 @@ namespace JesseJohnston.Tests
 			view.Sort = "StringValue XYZ";
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void SortInvalidTerm()
 		{
@@ -1682,7 +1681,7 @@ namespace JesseJohnston.Tests
 			view.Sort = "StringValue ASC, DateTimeValue DESC IntegerValue";
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortSinglePropDefaultDirection()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1715,7 +1714,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("eee", ((SimpleClass)view[4]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortSinglePropAsc()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1748,7 +1747,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("eee", ((SimpleClass)view[4]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortSinglePropDesc()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1781,7 +1780,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("aaa", ((SimpleClass)view[4]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortPropertyPath()
 		{
 			ViewFactory factory = ViewFactory.IListOrders();
@@ -1822,7 +1821,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("Nails", ((Order)view[4]).Product);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortPropertyPathInaccessibleValues()
 		{
 			ViewFactory factory = ViewFactory.IListOrders();
@@ -1868,7 +1867,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("Boxes", ((Order)view[5]).Product);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortMultipleProps()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1906,7 +1905,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("ccc", ((SimpleClass)view[5]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortMultiplePropsDefaultDirection()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1944,7 +1943,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("ccc", ((SimpleClass)view[5]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void BeforeAfterListChanged()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -1978,7 +1977,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(3, callbackOrder);
 		}
 
-		[Test]
+		[TestMethod]
 		public void BeforeAfterListChangedInUpdate()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();

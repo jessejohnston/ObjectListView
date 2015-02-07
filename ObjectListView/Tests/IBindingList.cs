@@ -1,5 +1,5 @@
 // ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 #pragma warning disable 1591	// Missing XML comment
 
@@ -9,12 +9,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using NUnit.Framework;
-using JesseJohnston;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JesseJohnston.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class IBindingListTests
 	{
 		private List<SimpleClass> list;
@@ -26,7 +25,7 @@ namespace JesseJohnston.Tests
 		private int listChangedResetRaised;
 		private int listChangedItemChangedRaised;
 
-		[SetUp]
+		[TestInitialize]
 		public void Setup()
 		{
 			list = new List<SimpleClass>();
@@ -76,14 +75,14 @@ namespace JesseJohnston.Tests
 			};
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void AddIndexNull()
 		{
 			((IBindingList)view).AddIndex(null);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void AddIndexNotInType()
 		{
@@ -91,7 +90,7 @@ namespace JesseJohnston.Tests
 			((IBindingList)view).AddIndex(dateProps[0]);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void AddIndexListItemTypeNotSet()
 		{
@@ -100,14 +99,14 @@ namespace JesseJohnston.Tests
 			((IBindingList)view).AddIndex(simpleProps[0]);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddIndexPopulatedList()
 		{
 			PropertyDescriptorCollection simpleProps = TypeDescriptor.GetProperties(typeof(SimpleClass));
 			((IBindingList)view).AddIndex(simpleProps[0]);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddIndexListItemTypeSet()
 		{
 			PropertyDescriptorCollection simpleProps = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -115,7 +114,7 @@ namespace JesseJohnston.Tests
 			((IBindingList)view).AddIndex(simpleProps[0]);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNew()
 		{
 			object added = this.view.AddNew();
@@ -132,7 +131,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, listChangedAddedRaised);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewUserObject()
 		{
 			this.view.AddingNew += delegate(object sender, AddingNewEventArgs e)
@@ -154,7 +153,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, listChangedAddedRaised);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void AddNewUserObjectInvalidType()
 		{
@@ -166,7 +165,7 @@ namespace JesseJohnston.Tests
 			object added = this.view.AddNew();
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(NotSupportedException))]
 		public void AddNewAndEndEdit()
 		{
@@ -174,7 +173,7 @@ namespace JesseJohnston.Tests
 			added.EndEdit();
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(NotSupportedException))]
 		public void AddNewAndCancelEdit()
 		{
@@ -182,7 +181,7 @@ namespace JesseJohnston.Tests
 			added.CancelEdit();
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObject()
 		{
 			view = new ObjectListView(new ArrayList());
@@ -211,7 +210,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(4, listChangedAddedRaised);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewExplicitEditableObject()
 		{
 			view = new ObjectListView(new ArrayList());
@@ -240,7 +239,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(4, listChangedAddedRaised);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectAndEndEdit()
 		{
 			view = new ObjectListView(new ArrayList());
@@ -268,7 +267,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(5, listChangedAddedRaised);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewExplicitEditableObjectAndEndEdit()
 		{
 			view = new ObjectListView(new ArrayList());
@@ -296,7 +295,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(5, listChangedAddedRaised);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectAndCancelEdit()
 		{
 			view = new ObjectListView(new ArrayList());
@@ -325,7 +324,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, listChangedDeletedRaised);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewExplicitEditableObjectAndCancelEdit()
 		{
 			view = new ObjectListView(new ArrayList());
@@ -354,7 +353,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, listChangedDeletedRaised);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectSorted()
 		{
 			ViewFactory factory = ViewFactory.IListIEditableObjectItems();
@@ -376,7 +375,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(3, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectSortedEndNew()
 		{
 			ViewFactory factory = ViewFactory.IListIEditableObjectItems();
@@ -402,7 +401,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectFiltered()
 		{
 			ViewFactory factory = ViewFactory.IListIEditableObjectItems();
@@ -423,7 +422,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(3, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectFilteredEndNew()
 		{
 			ViewFactory factory = ViewFactory.IListIEditableObjectItems();
@@ -448,7 +447,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(-1, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectSortedFiltered()
 		{
 			ViewFactory factory = ViewFactory.IListIEditableObjectItems();
@@ -472,7 +471,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(3, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectSortedFilteredEndNew()
 		{
 			ViewFactory factory = ViewFactory.IListIEditableObjectItems();
@@ -500,7 +499,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(-1, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewSorted()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -522,7 +521,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(3, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewSortedEndNew()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -548,7 +547,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewFiltered()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -572,7 +571,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(3, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewFilteredEndNew()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -597,7 +596,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(-1, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewSortedFiltered()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -621,7 +620,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(3, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewSortedFilteredEndNew()
 		{
 			ViewFactory factory = ViewFactory.IBindingListSimpleItems();
@@ -649,41 +648,41 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(-1, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowEditDefault()
 		{
 			Assert.IsTrue(this.view.AllowEdit);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowEditDefaultReadOnly()
 		{
 			this.view = new ObjectListView(ArrayList.ReadOnly(new ArrayList()));
 			Assert.IsFalse(this.view.AllowEdit);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowEditDefaultFixedSize()
 		{
 			this.view = new ObjectListView(new int[5]);
 			Assert.IsTrue(this.view.AllowEdit);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowEditSetTrue()
 		{
 			this.view.AllowEdit = true;
 			Assert.IsTrue(this.view.AllowEdit);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowEditSetFalse()
 		{
 			this.view.AllowEdit = false;
 			Assert.IsFalse(this.view.AllowEdit);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void AllowEditSetTrueReadOnly()
 		{
@@ -691,7 +690,7 @@ namespace JesseJohnston.Tests
 			this.view.AllowEdit = true;
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowEditSetFalseReadOnly()
 		{
 			this.view = new ObjectListView(ArrayList.ReadOnly(new ArrayList()));
@@ -699,7 +698,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(this.view.AllowEdit);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowEditSetTrueFixedSize()
 		{
 			this.view = new ObjectListView(new int[5]);
@@ -707,7 +706,7 @@ namespace JesseJohnston.Tests
 			Assert.IsTrue(this.view.AllowEdit);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowEditSetFalseFixedSize()
 		{
 			this.view = new ObjectListView(new int[5]);
@@ -715,7 +714,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(this.view.AllowEdit);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(DataException))]
 		public void AllowEditSetFalseEdit()
 		{
@@ -725,41 +724,41 @@ namespace JesseJohnston.Tests
 			factory.View[0] = new SimpleClass();
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowNewDefault()
 		{
 			Assert.IsTrue(this.view.AllowNew);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowNewDefaultReadOnly()
 		{
 			this.view = new ObjectListView(ArrayList.ReadOnly(new ArrayList()));
 			Assert.IsFalse(this.view.AllowNew);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowNewDefaultFixedSize()
 		{
 			this.view = new ObjectListView(new int[5]);
 			Assert.IsFalse(this.view.AllowNew);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowNewSetTrue()
 		{
 			this.view.AllowNew = true;
 			Assert.IsTrue(this.view.AllowNew);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowNewSetFalse()
 		{
 			this.view.AllowNew = false;
 			Assert.IsFalse(this.view.AllowNew);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void AllowNewSetTrueReadOnly()
 		{
@@ -767,7 +766,7 @@ namespace JesseJohnston.Tests
 			this.view.AllowNew = true;
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowNewSetFalseReadOnly()
 		{
 			this.view = new ObjectListView(ArrayList.ReadOnly(new ArrayList()));
@@ -775,7 +774,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(this.view.AllowNew);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void AllowNewSetTrueFixedSize()
 		{
@@ -783,7 +782,7 @@ namespace JesseJohnston.Tests
 			this.view.AllowNew = true;
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowNewSetFalseFixedSize()
 		{
 			this.view = new ObjectListView(new int[5]);
@@ -791,7 +790,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(this.view.AllowNew);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(DataException))]
 		public void AllowNewSetFalseAdd()
 		{
@@ -800,7 +799,7 @@ namespace JesseJohnston.Tests
 			factory.View.Add(new SimpleClass());
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(DataException))]
 		public void AllowNewSetFalseAddNew()
 		{
@@ -809,7 +808,7 @@ namespace JesseJohnston.Tests
 			factory.View.AddNew();
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(DataException))]
 		public void AllowNewSetFalseInsert()
 		{
@@ -818,41 +817,41 @@ namespace JesseJohnston.Tests
 			factory.View.Insert(0, new SimpleClass());
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowRemoveDefault()
 		{
 			Assert.IsTrue(this.view.AllowRemove);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowRemoveDefaultReadOnly()
 		{
 			this.view = new ObjectListView(ArrayList.ReadOnly(new ArrayList()));
 			Assert.IsFalse(this.view.AllowRemove);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowRemoveDefaultFixedSize()
 		{
 			this.view = new ObjectListView(new int[5]);
 			Assert.IsFalse(this.view.AllowRemove);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowRemoveSetTrue()
 		{
 			this.view.AllowRemove = true;
 			Assert.IsTrue(this.view.AllowRemove);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowRemoveSetFalse()
 		{
 			this.view.AllowRemove = false;
 			Assert.IsFalse(this.view.AllowRemove);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void AllowRemoveSetTrueReadOnly()
 		{
@@ -860,7 +859,7 @@ namespace JesseJohnston.Tests
 			this.view.AllowRemove = true;
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowRemoveSetFalseReadOnly()
 		{
 			this.view = new ObjectListView(ArrayList.ReadOnly(new ArrayList()));
@@ -868,7 +867,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(this.view.AllowRemove);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void AllowRemoveSetTrueFixedSize()
 		{
@@ -876,7 +875,7 @@ namespace JesseJohnston.Tests
 			this.view.AllowRemove = true;
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowRemoveSetFalseFixedSize()
 		{
 			this.view = new ObjectListView(new int[5]);
@@ -884,7 +883,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(this.view.AllowRemove);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(DataException))]
 		public void AllowRemoveSetFalseRemove()
 		{
@@ -895,7 +894,7 @@ namespace JesseJohnston.Tests
 			factory.View.Remove(item);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(DataException))]
 		public void AllowRemoveSetFalseRemoveAt()
 		{
@@ -906,7 +905,7 @@ namespace JesseJohnston.Tests
 			factory.View.RemoveAt(0);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ApplySort()
 		{
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -934,7 +933,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(100, ((SimpleClass)val).IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ApplySortDescending()
 		{
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -962,7 +961,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("aaa", ((SimpleClass)val).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ApplySortNullable()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1007,7 +1006,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(new DateTime(1993, 11, 12), ((SimpleClass)val).NullableDateTimeValue);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void ApplySortInvalidProperty()
 		{
@@ -1015,7 +1014,7 @@ namespace JesseJohnston.Tests
 			this.view.ApplySort(props["Day"], ListSortDirection.Ascending);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void ApplySortIncomparableProperty()
 		{
@@ -1026,7 +1025,7 @@ namespace JesseJohnston.Tests
 			view.ApplySort(props["IncomparableValue"], ListSortDirection.Ascending);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ApplySortNull()
 		{
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -1054,7 +1053,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(60, ((SimpleClass)val).IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Find()
 		{
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -1062,14 +1061,14 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(2, index);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void FindNullProp()
 		{
 			((IBindingList)this.view).Find(null, new DateTime(1975, 6, 6));
 		}
 
-		[Test]
+		[TestMethod]
 		public void FindSorted()
 		{
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -1078,13 +1077,13 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, index);
 		}
 
-		[Test]
+		[TestMethod]
 		public void IsSortedUnsorted()
 		{
 			Assert.IsFalse(this.view.IsSorted);
 		}
 
-		[Test]
+		[TestMethod]
 		public void IsSortedSorted()
 		{
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -1092,7 +1091,7 @@ namespace JesseJohnston.Tests
 			Assert.IsTrue(this.view.IsSorted);
 		}
 
-		[Test]
+		[TestMethod]
 		public void IsSortedSortedRemoveSort()
 		{
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -1101,28 +1100,28 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(this.view.IsSorted);
 		}
 
-		[Test]
+		[TestMethod]
 		public void IsSortedUnsortedRemoveSort()
 		{
 			this.view.RemoveSort();
 			Assert.IsFalse(this.view.IsSorted);
 		}
 
-		[Test]
+		[TestMethod]
 		public void RemoveIndex()
 		{
 			PropertyDescriptorCollection simpleProps = TypeDescriptor.GetProperties(typeof(SimpleClass));
 			((IBindingList)view).RemoveIndex(simpleProps[0]);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void RemoveIndexNull()
 		{
 			((IBindingList)view).RemoveIndex(null);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void RemoveIndexNotInType()
 		{
@@ -1130,7 +1129,7 @@ namespace JesseJohnston.Tests
 			((IBindingList)view).RemoveIndex(dateProps[0]);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void RemoveIndexListItemTypeNotSet()
 		{
@@ -1139,7 +1138,7 @@ namespace JesseJohnston.Tests
 			((IBindingList)view).RemoveIndex(simpleProps[0]);
 		}
 
-		[Test]
+		[TestMethod]
 		public void RemoveSort()
 		{
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -1150,7 +1149,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(100, ((SimpleClass)this.view[0]).IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void RemoveSortNoApplySort()
 		{
 			this.view.RemoveSort();
@@ -1159,7 +1158,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(100, ((SimpleClass)this.view[0]).IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void RemoveSortMultiple()
 		{
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -1171,7 +1170,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(100, ((SimpleClass)this.view[0]).IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortDirectionAscending()
 		{
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -1179,7 +1178,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(ListSortDirection.Ascending, this.view.SortDirection);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortDirectionDescending()
 		{
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -1187,13 +1186,13 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(ListSortDirection.Descending, this.view.SortDirection);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortDirectionNoSort()
 		{
 			Assert.AreEqual(ListSortDirection.Ascending, this.view.SortDirection);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortDirectionAfterRemoveSort()
 		{
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -1202,7 +1201,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(ListSortDirection.Ascending, this.view.SortDirection);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortProperty()
 		{
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -1211,13 +1210,13 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(intProp, this.view.SortProperty);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortPropertyNoSort()
 		{
 			Assert.IsNull(this.view.SortProperty);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortPropertyAfterRemoveSort()
 		{
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(SimpleClass));
@@ -1226,7 +1225,7 @@ namespace JesseJohnston.Tests
 			Assert.IsNull(this.view.SortProperty);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortAddItem()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1260,7 +1259,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("aaa", ((SimpleClass)view[5]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortAddItemListDirect()
 		{
 			ViewFactory factory = ViewFactory.IListSimpleItems();
@@ -1296,7 +1295,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("aaa", ((SimpleClass)view[5]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortChangeItem()
 		{
 			ViewFactory factory = ViewFactory.IListINotifyPropertyChangedItems();
@@ -1330,14 +1329,14 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("bbb", ((NotifyingListItem)view[4]).StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SupportsChangeNotification()
 		{
 			// List<> does not implement ListChanged, but the wrapper must report true.
 			Assert.IsTrue(((IBindingListView)this.view).SupportsChangeNotification);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SupportsChangeNotificationIBindingList()
 		{
 			ObjectListView view = new ObjectListView(new BindingList<SimpleClass>());
@@ -1346,7 +1345,7 @@ namespace JesseJohnston.Tests
 			Assert.IsTrue(((IBindingListView)view).SupportsChangeNotification);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SupportsChangeNotificationNotifyingList()
 		{
 			ObjectListView view = new ObjectListView(new NotifyingList());
@@ -1358,7 +1357,7 @@ namespace JesseJohnston.Tests
 		/// <summary>
 		/// List items that don't support INotifyPropertyChanged or xxxChanged shouldn't cause ListChanged to be raised.
 		/// </summary>
-		[Test]
+		[TestMethod]
 		public void ListChangedSimpleItemChanged()
 		{
 			BindingList<SimpleEditableObject> list = new BindingList<SimpleEditableObject>();
@@ -1384,7 +1383,7 @@ namespace JesseJohnston.Tests
 		/// <summary>
 		/// List items that support INotifyPropertyChanged will cause ListChanged to be raised.
 		/// </summary>
-		[Test]
+		[TestMethod]
 		public void ListChangedNotifyingItemChanged()
 		{
 			BindingList<NotifyingListItem> list = new BindingList<NotifyingListItem>();
@@ -1410,7 +1409,7 @@ namespace JesseJohnston.Tests
 		/// <summary>
 		/// List items that support xxxChanged events will cause ListChanged to be raised.
 		/// </summary>
-		[Test]
+		[TestMethod]
 		public void ListChangedNotifyingEventItemChanged()
 		{
 			BindingList<NotifyingListItemEvents> list = new BindingList<NotifyingListItemEvents>();
@@ -1433,7 +1432,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, this.listChangedResetRaised);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ListChangedItemReplaced()
 		{
 			BindingList<SimpleClass> list = new BindingList<SimpleClass>();
@@ -1460,7 +1459,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(0, this.listChangedResetRaised);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ListChangedItemReplacedAndUpdated()
 		{
 			BindingList<NotifyingListItem> list = new BindingList<NotifyingListItem>();
@@ -1480,26 +1479,26 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(2, this.listChangedItemChangedRaised);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SupportsSearching()
 		{
 			Assert.IsTrue(((IBindingListView)this.view).SupportsSearching);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SupportsSorting()
 		{
 			Assert.IsTrue(((IBindingListView)this.view).SupportsSorting);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SupportsSortingNoItemType()
 		{
 			ObjectListView view = new ObjectListView(new ArrayList());
 			Assert.IsFalse(((IBindingListView)view).SupportsSorting);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SupportsSortingNoProps()
 		{
 			ObjectListView view = new ObjectListView(new List<int>());

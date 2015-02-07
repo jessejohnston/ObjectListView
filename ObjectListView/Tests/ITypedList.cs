@@ -1,22 +1,19 @@
 // ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 #pragma warning disable 1591	// Missing XML comment
 
 #if TEST
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using NUnit.Framework;
-using JesseJohnston;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JesseJohnston.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class ITypedListTests
 	{
-		[Test]
+		[TestMethod]
 		public void GetListName()
 		{
 			List<SimpleClass> list = new List<SimpleClass>();
@@ -26,7 +23,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("", ((ITypedList)view).GetListName(null));
 		}
 
-		[Test]
+		[TestMethod]
 		public void GetListNameAccessors()
 		{
 			List<SimpleClass> list = new List<SimpleClass>();
@@ -40,7 +37,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("", ((ITypedList)view).GetListName(listAccessors));
 		}
 
-		[Test]
+		[TestMethod]
 		public void GetItemProperties()
 		{
 			List<SimpleClass> list = new List<SimpleClass>();
@@ -51,7 +48,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(typeProps, props);
 		}
 
-		[Test]
+		[TestMethod]
 		public void GetItemPropertiesAccessors()
 		{
 			List<SimpleClass> list = new List<SimpleClass>();

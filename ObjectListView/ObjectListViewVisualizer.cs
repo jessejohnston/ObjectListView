@@ -1,6 +1,7 @@
+// ObjectListView
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
+
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
 using Microsoft.VisualStudio.DebuggerVisualizers;

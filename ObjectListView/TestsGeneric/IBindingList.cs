@@ -1,5 +1,5 @@
 // ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 #pragma warning disable 1591	// Missing XML comment
 
@@ -8,15 +8,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using NUnit.Framework;
-using JesseJohnston;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JesseJohnston.Tests.Generic
 {
-	[TestFixture]
+	[TestClass]
 	public class IBindingListTests
 	{
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void AddIndexNull()
 		{
@@ -24,7 +23,7 @@ namespace JesseJohnston.Tests.Generic
 			((IBindingList)factory.View).AddIndex(null);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void AddIndexNotInType()
 		{
@@ -33,7 +32,7 @@ namespace JesseJohnston.Tests.Generic
 			((IBindingList)factory.View).AddIndex(dateProps[0]);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddIndexPopulatedList()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -41,7 +40,7 @@ namespace JesseJohnston.Tests.Generic
 			((IBindingList)factory.View).AddIndex(simpleProps[0]);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNew()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -67,7 +66,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(1, factory.ListChangedAddedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewUserObject()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -98,7 +97,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(1, factory.ListChangedAddedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(NotSupportedException))]
 		public void AddNewAndEndEdit()
 		{
@@ -108,7 +107,7 @@ namespace JesseJohnston.Tests.Generic
 			added.EndEdit();
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(NotSupportedException))]
 		public void AddNewAndCancelEdit()
 		{
@@ -118,7 +117,7 @@ namespace JesseJohnston.Tests.Generic
 			added.CancelEdit();
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObject()
 		{
 			ViewFactory<SimpleEditableObject> factory = ViewFactory<SimpleEditableObject>.IList();
@@ -144,7 +143,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(4, factory.ListChangedAddedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewExplicitEditableObject()
 		{
 			ViewFactory<ExplicitEditableObject> factory = ViewFactory<ExplicitEditableObject>.IList();
@@ -170,7 +169,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(4, factory.ListChangedAddedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectAndEndEdit()
 		{
 			ViewFactory<SimpleEditableObject> factory = ViewFactory<SimpleEditableObject>.IList();
@@ -196,7 +195,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(5, factory.ListChangedAddedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewExplicitEditableObjectAndEndEdit()
 		{
 			ViewFactory<ExplicitEditableObject> factory = ViewFactory<ExplicitEditableObject>.IList();
@@ -222,7 +221,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(5, factory.ListChangedAddedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectAndCancelEdit()
 		{
 			ViewFactory<SimpleEditableObject> factory = ViewFactory<SimpleEditableObject>.IList();
@@ -249,7 +248,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(1, factory.ListChangedDeletedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewExplicitEditableObjectAndCancelEdit()
 		{
 			ViewFactory<ExplicitEditableObject> factory = ViewFactory<ExplicitEditableObject>.IList();
@@ -276,7 +275,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(1, factory.ListChangedDeletedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectSorted()
 		{
 			ViewFactory<SimpleEditableObject> factory = ViewFactory<SimpleEditableObject>.IList();
@@ -297,7 +296,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(3, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectSortedEndNew()
 		{
 			ViewFactory<SimpleEditableObject> factory = ViewFactory<SimpleEditableObject>.IList();
@@ -322,7 +321,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(0, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectFiltered()
 		{
 			ViewFactory<SimpleEditableObject> factory = ViewFactory<SimpleEditableObject>.IList();
@@ -342,7 +341,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(3, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectFilteredEndNew()
 		{
 			ViewFactory<SimpleEditableObject> factory = ViewFactory<SimpleEditableObject>.IList();
@@ -366,7 +365,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(-1, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectSortedFiltered()
 		{
 			ViewFactory<SimpleEditableObject> factory = ViewFactory<SimpleEditableObject>.IList();
@@ -389,7 +388,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(3, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectSortedFilteredEndNew()
 		{
 			ViewFactory<SimpleEditableObject> factory = ViewFactory<SimpleEditableObject>.IList();
@@ -416,7 +415,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(-1, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewSorted()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -437,7 +436,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(3, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewSortedEndNew()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -462,7 +461,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(0, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewFiltered()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -485,7 +484,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(3, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewFilteredEndNew()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -509,7 +508,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(-1, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewSortedFiltered()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -532,7 +531,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(3, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewSortedFilteredEndNew()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -559,21 +558,21 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(-1, view.IndexOf(item));
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowEditDefault()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
 			Assert.IsTrue(factory.View.AllowEdit);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowEditDefaultReadOnly()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IListReadOnly();
 			Assert.IsFalse(factory.View.AllowEdit);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowEditSetTrue()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -581,7 +580,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsTrue(factory.View.AllowEdit);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowEditSetFalse()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -589,7 +588,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsFalse(factory.View.AllowEdit);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void AllowEditSetTrueReadOnly()
 		{
@@ -597,7 +596,7 @@ namespace JesseJohnston.Tests.Generic
 			factory.View.AllowEdit = true;
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowEditSetFalseReadOnly()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IListReadOnly();
@@ -605,7 +604,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsFalse(factory.View.AllowEdit);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(DataException))]
 		public void AllowEditSetFalseEdit()
 		{
@@ -615,21 +614,21 @@ namespace JesseJohnston.Tests.Generic
 			factory.View[0] = new SimpleClass();
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowNewDefault()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
 			Assert.IsTrue(factory.View.AllowNew);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowNewDefaultReadOnly()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IListReadOnly();
 			Assert.IsFalse(factory.View.AllowNew);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowNewSetTrue()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -637,7 +636,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsTrue(factory.View.AllowNew);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowNewSetFalse()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -645,7 +644,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsFalse(factory.View.AllowNew);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void AllowNewSetTrueReadOnly()
 		{
@@ -653,7 +652,7 @@ namespace JesseJohnston.Tests.Generic
 			factory.View.AllowNew = true;
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowNewSetFalseReadOnly()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IListReadOnly();
@@ -661,7 +660,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsFalse(factory.View.AllowNew);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(DataException))]
 		public void AllowNewSetFalseAdd()
 		{
@@ -670,7 +669,7 @@ namespace JesseJohnston.Tests.Generic
 			factory.View.Add(new SimpleClass());
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(DataException))]
 		public void AllowNewSetFalseAddNew()
 		{
@@ -679,7 +678,7 @@ namespace JesseJohnston.Tests.Generic
 			factory.View.AddNew();
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(DataException))]
 		public void AllowNewSetFalseInsert()
 		{
@@ -688,21 +687,21 @@ namespace JesseJohnston.Tests.Generic
 			factory.View.Insert(0, new SimpleClass());
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowRemoveDefault()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
 			Assert.IsTrue(factory.View.AllowRemove);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowRemoveDefaultReadOnly()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IListReadOnly();
 			Assert.IsFalse(factory.View.AllowRemove);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowRemoveSetTrue()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -710,7 +709,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsTrue(factory.View.AllowRemove);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowRemoveSetFalse()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -718,7 +717,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsFalse(factory.View.AllowRemove);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void AllowRemoveSetTrueReadOnly()
 		{
@@ -726,7 +725,7 @@ namespace JesseJohnston.Tests.Generic
 			factory.View.AllowRemove = true;
 		}
 
-		[Test]
+		[TestMethod]
 		public void AllowRemoveSetFalseReadOnly()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IListReadOnly();
@@ -734,7 +733,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsFalse(factory.View.AllowRemove);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(DataException))]
 		public void AllowRemoveSetFalseRemove()
 		{
@@ -745,7 +744,7 @@ namespace JesseJohnston.Tests.Generic
 			factory.View.Remove(item);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(DataException))]
 		public void AllowRemoveSetFalseRemoveAt()
 		{
@@ -756,7 +755,7 @@ namespace JesseJohnston.Tests.Generic
 			factory.View.RemoveAt(0);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ApplySort()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -790,7 +789,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(100, val.IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ApplySortDescending()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -824,7 +823,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual("aaa", val.StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ApplySortNullable()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -867,7 +866,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(new DateTime(1993, 11, 12), val.NullableDateTimeValue);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void ApplySortInvalidProperty()
 		{
@@ -876,7 +875,7 @@ namespace JesseJohnston.Tests.Generic
 			factory.View.ApplySort(props["Day"], ListSortDirection.Ascending);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void ApplySortIncomparableProperty()
 		{
@@ -886,7 +885,7 @@ namespace JesseJohnston.Tests.Generic
 			factory.View.ApplySort(props["IncomparableValue"], ListSortDirection.Ascending);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ApplySortNull()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -920,7 +919,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(60, val.IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Find()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -935,7 +934,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(2, index);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void FindNullProp()
 		{
@@ -943,7 +942,7 @@ namespace JesseJohnston.Tests.Generic
 			((IBindingList)factory.View).Find((PropertyDescriptor)null, new DateTime(1975, 6, 6));
 		}
 
-		[Test]
+		[TestMethod]
 		public void FindSorted()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -959,14 +958,14 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(1, index);
 		}
 
-		[Test]
+		[TestMethod]
 		public void IsSortedUnsorted()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
 			Assert.IsFalse(factory.View.IsSorted);
 		}
 
-		[Test]
+		[TestMethod]
 		public void IsSortedSorted()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -975,7 +974,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsTrue(factory.View.IsSorted);
 		}
 
-		[Test]
+		[TestMethod]
 		public void IsSortedSortedRemoveSort()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -987,7 +986,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsFalse(view.IsSorted);
 		}
 
-		[Test]
+		[TestMethod]
 		public void IsSortedUnsortedRemoveSort()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -997,7 +996,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsFalse(view.IsSorted);
 		}
 
-		[Test]
+		[TestMethod]
 		public void RemoveIndex()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -1006,7 +1005,7 @@ namespace JesseJohnston.Tests.Generic
 			((IBindingList)factory.View).RemoveIndex(simpleProps[0]);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void RemoveIndexNull()
 		{
@@ -1014,7 +1013,7 @@ namespace JesseJohnston.Tests.Generic
 			((IBindingList)factory.View).RemoveIndex(null);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void RemoveIndexNotInType()
 		{
@@ -1024,7 +1023,7 @@ namespace JesseJohnston.Tests.Generic
 			((IBindingList)factory.View).RemoveIndex(dateProps[0]);
 		}
 
-		[Test]
+		[TestMethod]
 		public void RemoveSort()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -1044,7 +1043,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(100, view[0].IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void RemoveSortNoApplySort()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -1062,7 +1061,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(100, view[0].IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void RemoveSortMultiple()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -1083,7 +1082,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(100, view[0].IntegerValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortDirectionAscending()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -1094,7 +1093,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(ListSortDirection.Ascending, view.SortDirection);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortDirectionDescending()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -1105,14 +1104,14 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(ListSortDirection.Descending, view.SortDirection);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortDirectionNoSort()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
 			Assert.AreEqual(ListSortDirection.Ascending, factory.View.SortDirection);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortDirectionAfterRemoveSort()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -1124,7 +1123,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(ListSortDirection.Ascending, view.SortDirection);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortProperty()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -1136,14 +1135,14 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(intProp, view.SortProperty);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortPropertyNoSort()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
 			Assert.IsNull(factory.View.SortProperty);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortPropertyAfterRemoveSort()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -1155,7 +1154,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsNull(view.SortProperty);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortAddItem()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -1189,7 +1188,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual("aaa", view[5].StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortAddItemListDirect()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -1225,7 +1224,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual("aaa", view[5].StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SortChangeItem()
 		{
 			ViewFactory<NotifyingListItem> factory = ViewFactory<NotifyingListItem>.IList();
@@ -1259,7 +1258,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual("bbb", view[4].StringValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SupportsChangeNotification()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -1268,7 +1267,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsTrue(((IBindingListView)factory.View).SupportsChangeNotification);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SupportsChangeNotificationIBindingList()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IBindingList();
@@ -1277,7 +1276,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsTrue(((IBindingListView)factory.View).SupportsChangeNotification);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SupportsChangeNotificationNotifyingList()
 		{
 			ObjectListView<SimpleClass> view = new ObjectListView<SimpleClass>(new NotifyingList<SimpleClass>());
@@ -1289,7 +1288,7 @@ namespace JesseJohnston.Tests.Generic
 		/// <summary>
 		/// List items that don't support INotifyPropertyChanged or xxxChanged shouldn't cause ListChanged to be raised.
 		/// </summary>
-		[Test]
+		[TestMethod]
 		public void ListChangedSimpleItemChanged()
 		{
 			BindingList<SimpleEditableObject> list = new BindingList<SimpleEditableObject>();
@@ -1316,7 +1315,7 @@ namespace JesseJohnston.Tests.Generic
 		/// <summary>
 		/// List items that support INotifyPropertyChanged will cause ListChanged to be raised.
 		/// </summary>
-		[Test]
+		[TestMethod]
 		public void ListChangedNotifyingItemChanged()
 		{
 			BindingList<NotifyingListItem> list = new BindingList<NotifyingListItem>();
@@ -1343,7 +1342,7 @@ namespace JesseJohnston.Tests.Generic
 		/// <summary>
 		/// List items that support xxxChanged events will cause ListChanged to be raised.
 		/// </summary>
-		[Test]
+		[TestMethod]
 		public void ListChangedNotifyingEventItemChanged()
 		{
 			BindingList<NotifyingListItemEvents> list = new BindingList<NotifyingListItemEvents>();
@@ -1367,7 +1366,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(0, factory.ListChangedResetCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ListChangedItemReplaced()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IBindingList();
@@ -1394,7 +1393,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(0, factory.ListChangedResetCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ListChangedItemReplacedAndUpdated()
 		{
 			ViewFactory<NotifyingListItem> factory = ViewFactory<NotifyingListItem>.IBindingList();
@@ -1414,21 +1413,21 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(2, factory.ListChangedItemChangedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SupportsSearching()
 		{
 			ViewFactory<SimpleEditableObject> factory = ViewFactory<SimpleEditableObject>.IList();
 			Assert.IsTrue(((IBindingListView)factory.View).SupportsSearching);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SupportsSorting()
 		{
 			ViewFactory<SimpleEditableObject> factory = ViewFactory<SimpleEditableObject>.IList();
 			Assert.IsTrue(((IBindingListView)factory.View).SupportsSorting);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SupportsSortingNoProps()
 		{
 			ObjectListView<int> view = new ObjectListView<int>(new List<int>());

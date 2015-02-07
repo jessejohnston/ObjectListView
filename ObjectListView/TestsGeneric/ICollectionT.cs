@@ -1,20 +1,19 @@
 // ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 #pragma warning disable 1591	// Missing XML comment
 
 #if TEST
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
-using JesseJohnston;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JesseJohnston.Tests.Generic
 {
-	[TestFixture]
+	[TestClass]
 	public class ICollectionTTests
 	{
-		[Test]
+		[TestMethod]
 		public void Add()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -37,7 +36,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(new DateTime(1963, 3, 9), item.DateTimeValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddIBindingList()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IBindingList();
@@ -61,7 +60,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(new DateTime(1963, 3, 9), ((SimpleClass)item).DateTimeValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Clear()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -75,7 +74,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(0, factory.List.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ClearIBindingList()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IBindingList();
@@ -89,7 +88,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(0, factory.List.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ContainsItemInList()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -104,7 +103,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsTrue(view.Contains(bbb));
 		}
 
-		[Test]
+		[TestMethod]
 		public void ContainsItemNotInList()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -118,7 +117,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.IsFalse(view.Contains(new SimpleClass(100, "aaa", new DateTime(1970, 1, 1))));	// reference compare only for SimpleClass
 		}
 
-		[Test]
+		[TestMethod]
 		public void CopyTo()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -148,7 +147,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(new DateTime(1975, 6, 6), item.DateTimeValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CopyToEmptyList()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -156,7 +155,7 @@ namespace JesseJohnston.Tests.Generic
 			factory.View.CopyTo(array, 0);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Count()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -169,21 +168,21 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(list.Count, factory.View.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CountEmptyList()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
 			Assert.AreEqual(0, factory.View.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void IsReadOnly()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
 			Assert.AreEqual(factory.List.IsReadOnly, factory.View.IsReadOnly);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Remove()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -211,7 +210,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(1, factory.ListChangedDeletedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void RemoveIBindingList()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();

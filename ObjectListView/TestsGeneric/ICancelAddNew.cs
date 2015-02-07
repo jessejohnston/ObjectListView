@@ -1,22 +1,18 @@
 // ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 #pragma warning disable 1591	// Missing XML comment
 
 #if TEST
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using NUnit.Framework;
-using JesseJohnston;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JesseJohnston.Tests.Generic
 {
-	[TestFixture]
+	[TestClass]
 	public class ICancelAddNewTests
 	{
-		[Test]
+		[TestMethod]
 		public void AddNewAndEndNew()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -28,7 +24,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(1, factory.ListChangedAddedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewAndCancelNew()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -41,7 +37,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(1, factory.ListChangedDeletedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectAndEndNew()
 		{
 			ViewFactory<SimpleEditableObject> factory = ViewFactory<SimpleEditableObject>.IList();
@@ -53,7 +49,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(2, factory.ListChangedAddedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AddNewEditableObjectAndCancelNew()
 		{
 			ViewFactory<SimpleEditableObject> factory = ViewFactory<SimpleEditableObject>.IList();
@@ -66,7 +62,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(1, factory.ListChangedDeletedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EndNewWithoutAddNew()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -76,7 +72,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(0, factory.ListChangedAddedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void EndNewWithoutAddNewWithListAdd()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IBindingList();
@@ -89,7 +85,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(1, factory.ListChangedAddedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CancelNewWithoutAddNew()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IList();
@@ -100,7 +96,7 @@ namespace JesseJohnston.Tests.Generic
 			Assert.AreEqual(0, factory.ListChangedDeletedCount);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CancelNewWithoutAddNewWithListAdd()
 		{
 			ViewFactory<SimpleClass> factory = ViewFactory<SimpleClass>.IBindingList();

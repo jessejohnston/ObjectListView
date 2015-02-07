@@ -1,19 +1,18 @@
 // ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 #pragma warning disable 1591	// Missing XML comment
 
 #if TEST
 using System;
-using NUnit.Framework;
-using JesseJohnston;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JesseJohnston.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class ExtendedPropertyTests
 	{
-		[Test]
+		[TestMethod]
 		public void Construct()
 		{
 			ExtendedProperty prop = new ExtendedProperty(typeof(SimpleClass), "Total");
@@ -24,7 +23,7 @@ namespace JesseJohnston.Tests
 			Assert.IsTrue(prop.IsReadOnly);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConstructTyped()
 		{
 			ExtendedProperty prop = new ExtendedProperty(typeof(SimpleClass), "Total", typeof(int));
@@ -35,7 +34,7 @@ namespace JesseJohnston.Tests
 			Assert.IsTrue(prop.IsReadOnly);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConstructWritable()
 		{
 			ExtendedProperty prop = new ExtendedProperty(typeof(SimpleClass), "Total", typeof(int), true, null);
@@ -46,7 +45,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(prop.IsReadOnly);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConstructDefaultValue()
 		{
 			ExtendedProperty prop = new ExtendedProperty(typeof(SimpleClass), "Total", typeof(int), true, 42);
@@ -57,7 +56,7 @@ namespace JesseJohnston.Tests
 			Assert.IsFalse(prop.IsReadOnly);
 		}
 
-		[Test]
+		[TestMethod]
 		public void GetValue()
 		{
 			SimpleClass item = new SimpleClass(42, "Orders", DateTime.Now);
@@ -82,7 +81,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual("Orders: 42", propValue);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void GetValueWrongTypeReferenceType()
 		{
@@ -97,7 +96,7 @@ namespace JesseJohnston.Tests
 			object propValue = prop.PropertyDescriptor.GetValue(item);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void GetValueWrongTypeValueType()
 		{
@@ -112,7 +111,7 @@ namespace JesseJohnston.Tests
 			object propValue = prop.PropertyDescriptor.GetValue(item);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
 		public void GetValueNullValueType()
 		{
@@ -127,7 +126,7 @@ namespace JesseJohnston.Tests
 			object propValue = prop.PropertyDescriptor.GetValue(item);
 		}
 
-		[Test]
+		[TestMethod]
 		public void GetValueNullNullableValueType()
 		{
 			SimpleClass item = new SimpleClass(42, "Orders", DateTime.Now);
@@ -143,7 +142,7 @@ namespace JesseJohnston.Tests
 			Assert.IsNull(propValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void GetValueNullReferenceType()
 		{
 			SimpleClass item = new SimpleClass(42, "Orders", DateTime.Now);
@@ -161,7 +160,7 @@ namespace JesseJohnston.Tests
 			Assert.IsNull(propValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SetValue()
 		{
 			SimpleClass item = new SimpleClass(42, "Orders", DateTime.Now);
@@ -183,7 +182,7 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(1, callbacks);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void SetValueReadOnly()
 		{

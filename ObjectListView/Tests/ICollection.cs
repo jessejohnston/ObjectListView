@@ -1,5 +1,5 @@
 // ObjectListView
-// Copyright © 2006, 2007 Jesse Johnston.  All rights reserved.
+// Copyright © 2006-2015 Jesse Johnston.  All rights reserved.
 
 #pragma warning disable 1591	// Missing XML comment
 
@@ -7,18 +7,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
-using JesseJohnston;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JesseJohnston.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class ICollectionTests
 	{
 		private List<SimpleClass> emptyList;
 		private List<SimpleClass> nonEmptyList;
 
-		[SetUp]
+		[TestInitialize]
 		public void Setup()
 		{
 			emptyList = new List<SimpleClass>();
@@ -28,7 +27,7 @@ namespace JesseJohnston.Tests
 			nonEmptyList.Add(new SimpleClass(60, "ccc", new DateTime(1975, 6, 6)));
 		}
 
-		[Test]
+		[TestMethod]
 		public void CopyToEmptyList()
 		{
 			ObjectListView view = new ObjectListView(emptyList);
@@ -36,28 +35,28 @@ namespace JesseJohnston.Tests
 			view.CopyTo(array, 0);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CountEmptyList()
 		{
 			ObjectListView view = new ObjectListView(emptyList);
 			Assert.AreEqual(emptyList.Count, view.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void IsSynchronizedEmptyList()
 		{
 			ObjectListView view = new ObjectListView(emptyList);
 			Assert.AreEqual(((ICollection)emptyList).IsSynchronized, view.IsSynchronized);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SyncRootEmptyList()
 		{
 			ObjectListView view = new ObjectListView(emptyList);
 			Assert.AreEqual(((ICollection)emptyList).SyncRoot, view.SyncRoot);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CopyTo()
 		{
 			ObjectListView view = new ObjectListView(nonEmptyList);
@@ -81,21 +80,21 @@ namespace JesseJohnston.Tests
 			Assert.AreEqual(new DateTime(1975, 6, 6), item.DateTimeValue);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Count()
 		{
 			ObjectListView view = new ObjectListView(nonEmptyList);
 			Assert.AreEqual(nonEmptyList.Count, view.Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void IsSynchronized()
 		{
 			ObjectListView view = new ObjectListView(nonEmptyList);
 			Assert.AreEqual(((ICollection)nonEmptyList).IsSynchronized, view.IsSynchronized);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SyncRoot()
 		{
 			ObjectListView view = new ObjectListView(nonEmptyList);
